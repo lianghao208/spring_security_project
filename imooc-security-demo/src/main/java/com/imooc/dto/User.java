@@ -1,9 +1,11 @@
 package com.imooc.dto;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.imooc.validator.MyConstraint;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.Past;
 import java.util.Date;
 
 /**
@@ -16,13 +18,15 @@ public class User {
     //用户详细视图（继承用户简单视图）
     public interface UserDetailView extends UserSimpleView{}
 
+    @MyConstraint(message = "这是自定义校验器")
     private String username;
 
-    @NotBlank
+    @NotBlank(message = "密码不能为空")
     private String password;
 
     private String id;
 
+    @Past(message = "生日必须为过去的时间")
     private Date birthday;
 
     public Date getBirthday() {
