@@ -3,6 +3,9 @@ package com.imooc.web.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.imooc.dto.User;
 import com.imooc.dto.UserQueryCondition;
+import com.imooc.exception.UserNotExistException;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.data.web.PageableDefault;
@@ -61,6 +64,7 @@ public class UserController {
 
     @GetMapping
     @JsonView(User.UserSimpleView.class)
+    @ApiOperation(value = "用户查询服务")
     public List<User> query(UserQueryCondition condition,@PageableDefault(page=2,size=17,sort="username,asc") Pageable pageable){//用spring自带的pageable对象来得到分页信息
         System.out.println(ReflectionToStringBuilder.toString(condition, ToStringStyle.MULTI_LINE_STYLE));
         System.out.println(pageable.getPageSize());
@@ -80,7 +84,9 @@ public class UserController {
      */
     @GetMapping("/{id:\\d+}")
     @JsonView(User.UserDetailView.class)
-    public User getInfo(@PathVariable String id){
+    public User getInfo(@ApiParam("用户id") @PathVariable String id){
+        //throw new UserNotExistException(id);
+        System.out.println("进入getInfo服务");
         User user = new User();
         user.setUsername("tom");
         return user;
