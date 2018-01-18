@@ -9,9 +9,14 @@ import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
+import sun.text.normalizer.ICUBinary;
 
 
 import javax.validation.Valid;
@@ -24,6 +29,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    /**
+     * 获取当前用户验证信息
+     * @return
+     */
+    @GetMapping("/me")
+    public Object getCurrentUser(@AuthenticationPrincipal UserDetails user){
+        return user;
+    }
 
     @PutMapping("/{id:\\d+}")
     public User update(@Valid @RequestBody User user,

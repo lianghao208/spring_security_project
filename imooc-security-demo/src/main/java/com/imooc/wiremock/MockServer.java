@@ -1,9 +1,7 @@
 package com.imooc.wiremock;
 
-import com.github.tomakehurst.wiremock.client.WireMock;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.http.entity.StringEntity;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
