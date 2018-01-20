@@ -47,6 +47,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 	
 	@Autowired
 	private ValidateCodeSecurityConfig validateCodeSecurityConfig;
+
+	@Autowired
+	private SpringSocialConfigurer mySocialSecurityConfig;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -58,7 +61,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 				.and()
 			.apply(smsCodeAuthenticationSecurityConfig)
 				.and()
-				.rememberMe()
+			.apply(mySocialSecurityConfig)
+				.and()
+			.rememberMe()
 				.tokenRepository(persistentTokenRepository())
 				.tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
 				.userDetailsService(userDetailsService)
@@ -68,11 +73,11 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 					SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
 					SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
 					securityProperties.getBrowser().getLoginPage(),
-					SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*"/*,
-					securityProperties.getBrowser().getSignUpUrl(),
+					SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*",
+					securityProperties.getBrowser().getSignUpUrl(),/*
 					securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".json",
-					securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".html",
-					"/user/regist"*/)
+					securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".html",*/
+					"/user/regist")
 					.permitAll()
 				.anyRequest()
 				.authenticated()

@@ -7,7 +7,7 @@ public class BrowserProperties {
 
     private SessionProperties session = new SessionProperties();
 
-    private String signUpUrl = "/signIn.html";
+    private String signUpUrl = "/signUp.html";
 
     private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
 
