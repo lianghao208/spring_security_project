@@ -28,7 +28,7 @@ public class SocialConfig extends SocialConfigurerAdapter{
 
     @Qualifier("dataSource")
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     @Autowired
     private SecurityProperties securityProperties;
@@ -41,6 +41,7 @@ public class SocialConfig extends SocialConfigurerAdapter{
         JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
         //设置数据库名前缀
         repository.setTablePrefix("my_");
+        System.out.println("进入Jdbc！！！");
         if (connectionSignUp != null){
             repository.setConnectionSignUp(connectionSignUp);
         }
@@ -51,13 +52,15 @@ public class SocialConfig extends SocialConfigurerAdapter{
     public SpringSocialConfigurer mySocialSecurityConfig(){
         String filterProcessUrl = securityProperties.getSocial().getFilterProcessUrl();
         MySpringSocialConfigurer configurer = new MySpringSocialConfigurer(filterProcessUrl);
+        //数据库找不到用户时跳转到注册页面
         configurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
         return configurer;
     }
 
     @Bean
     public ProviderSignInUtils providerSignInUtils(ConnectionFactoryLocator connectionFactoryLocator){
-        return new ProviderSignInUtils(connectionFactoryLocator, getUsersConnectionRepository(connectionFactoryLocator)){
+        return new ProviderSignInUtils(connectionFactoryLocator,
+                getUsersConnectionRepository(connectionFactoryLocator)){
 
         };
     }

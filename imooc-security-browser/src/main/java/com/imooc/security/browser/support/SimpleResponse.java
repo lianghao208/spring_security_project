@@ -1,7 +1,7 @@
 package com.imooc.security.browser.support;
 
 /**
- * Created by Administrator on 2017/12/21.
+ * Created by Liang Hao on 2017/12/21.
  * 服务器响应的内容对象
  */
 public class SimpleResponse {

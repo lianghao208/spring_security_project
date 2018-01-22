@@ -1,5 +1,7 @@
 package com.imooc.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.stereotype.Component;
@@ -10,9 +12,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class DemoConnectionSignUp implements ConnectionSignUp {
+    Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
     public String execute(Connection<?> connection) {
         //根据社交用户信息默认创建用户并返回用户唯一标识
+        logger.info(connection.getDisplayName());
         return connection.getDisplayName();//取得社交用户昵称
     }
 }

@@ -1,11 +1,14 @@
 package com.imooc.security.core.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by Administrator on 2017/12/21.
  */
-@ConfigurationProperties(prefix = "my.security")  //读取用户设置的imooc.security为前缀的配置
+@ConfigurationProperties(prefix = "my.security")  //读取用户设置的my.security为前缀的配置
 public class SecurityProperties {
 
     private BrowserProperties browser = new BrowserProperties();

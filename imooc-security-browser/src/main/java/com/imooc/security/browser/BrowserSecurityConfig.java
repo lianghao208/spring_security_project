@@ -50,6 +50,12 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 
 	@Autowired
 	private SpringSocialConfigurer mySocialSecurityConfig;
+
+	@Autowired
+	private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
+
+	@Autowired
+	private InvalidSessionStrategy invalidSessionStrategy;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -68,16 +74,23 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 				.tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
 				.userDetailsService(userDetailsService)
 				.and()
+			.sessionManagement()
+				.invalidSessionStrategy(invalidSessionStrategy) //session失效后跳转的地址
+				.maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions()) //设置session最大数量，最多只能同时1个会话的session有效
+				.maxSessionsPreventsLogin(true)//当session数量达到最大时，true后面的session无法登陆，false/不设置：前面的session失效
+				.expiredSessionStrategy(sessionInformationExpiredStrategy)
+				.and()
+				.and()
 			.authorizeRequests()
 				.antMatchers( //允许访问的界面
 					SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
 					SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
 					securityProperties.getBrowser().getLoginPage(),
 					SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*",
-					securityProperties.getBrowser().getSignUpUrl(),/*
+					securityProperties.getBrowser().getSignUpUrl(),
 					securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".json",
-					securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".html",*/
-					"/user/regist")
+					securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".html",
+					"/user/regist","/session/invalid")
 					.permitAll()
 				.anyRequest()
 				.authenticated()

@@ -4,7 +4,7 @@
 package com.imooc.security.core.properties;
 
 /**
- * @author zhailiang
+ * Created by Liang Hao
  *
  */
 public class SessionProperties {

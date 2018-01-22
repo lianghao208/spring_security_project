@@ -3,7 +3,7 @@ package com.imooc.security.core.properties;
 import com.imooc.security.core.validate.code.sms.SmsCodeSender;
 
 /**
- * Created by Administrator on 2017/12/22.\
+ * Created by Liang Hao on 2017/12/22.\
  * 所有验证码配置
  */
 public class ValidateCodeProperties {
