@@ -22,6 +22,8 @@
             <artifactId>imooc-security-core</artifactId>
             <version>${imooc.security.version}</version>
         </dependency>
+
+        <!-- 搭建session集群，将session从服务器集群中抽取出来放入Redis，解决不同server的session一致性问题 -->
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session</artifactId>

@@ -1,13 +1,16 @@
 package com.imooc.security.core.validate.code;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * Created by Administrator on 2017/12/22.
  * 验证码类
  */
-public class ValidateCode {
+public class ValidateCode implements Serializable {
+
+    private static final long serialVersionUID = 1588203828504660915L;
 
     private String code; //随机数验证码
 
