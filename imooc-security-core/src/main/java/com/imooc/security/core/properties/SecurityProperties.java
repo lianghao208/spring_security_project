@@ -15,8 +15,23 @@ public class SecurityProperties {
 
     private ValidateCodeProperties code = new ValidateCodeProperties();
 
-    //社交网站配置
+    /**
+     * 社交网站配置
+     */
     private SocialProperties social = new SocialProperties();
+
+    /**
+     * 配置OAuth2
+     */
+    private OAuth2Properties oAuth2Properties = new OAuth2Properties();
+
+    public OAuth2Properties getoAuth2Properties() {
+        return oAuth2Properties;
+    }
+
+    public void setoAuth2Properties(OAuth2Properties oAuth2Properties) {
+        this.oAuth2Properties = oAuth2Properties;
+    }
 
     public SocialProperties getSocial() {
         return social;

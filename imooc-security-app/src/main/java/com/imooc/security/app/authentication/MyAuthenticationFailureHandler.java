@@ -1,9 +1,9 @@
-package com.imooc.security.browser.authentication;
+package com.imooc.security.app.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.imooc.security.core.support.SimpleResponse;
 import com.imooc.security.core.properties.LoginResponseType;
 import com.imooc.security.core.properties.SecurityProperties;
-import com.imooc.security.core.support.SimpleResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

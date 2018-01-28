@@ -1,4 +1,4 @@
-package com.imooc.security.browser.support;
+package com.imooc.security.core.support;
 
 /**
  * Created by Liang Hao on 2018/1/20.

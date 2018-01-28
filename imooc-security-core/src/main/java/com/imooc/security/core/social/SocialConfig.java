@@ -36,6 +36,9 @@ public class SocialConfig extends SocialConfigurerAdapter{
     @Autowired(required = false)
     private ConnectionSignUp connectionSignUp;//默认用第三方账号的信息进行注册
 
+    @Autowired(required = false)
+    private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
+
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
         JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
@@ -54,6 +57,7 @@ public class SocialConfig extends SocialConfigurerAdapter{
         MySpringSocialConfigurer configurer = new MySpringSocialConfigurer(filterProcessUrl);
         //数据库找不到用户时跳转到注册页面
         configurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
+        configurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
         return configurer;
     }
 

@@ -4,10 +4,17 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.imooc.dto.User;
 import com.imooc.dto.UserQueryCondition;
 import com.imooc.exception.UserNotExistException;
+import com.imooc.security.app.social.AppSignUpUtils;
+import com.imooc.security.core.properties.SecurityProperties;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
@@ -24,6 +31,7 @@ import sun.text.normalizer.ICUBinary;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +45,14 @@ public class UserController {
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
 
+    @Autowired
+    private AppSignUpUtils appSignUpUtils;
+
+    @Autowired
+    private SecurityProperties securityProperties;
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     /**
      * 用户注册
      * @param user
@@ -45,7 +61,8 @@ public class UserController {
     public void regist(User user, HttpServletRequest request){
         //不管注册用户、绑定用户，都会拿到一个用户唯一标识（使用username）
         String userId = user.getUsername();//从用户注册的请求中拿用户名
-        providerSignInUtils.doPostSignUp(userId,new ServletWebRequest(request));//绑定用户信息，将用户名id和Session绑定，将用户id和Session等信息插入数据库
+        //providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));//绑定用户信息，将用户名id和Session绑定，将用户id和Session等信息插入数据库
+        appSignUpUtils.doPostSignUp(new ServletWebRequest(request),userId);
     }
 
     /**
@@ -53,7 +70,13 @@ public class UserController {
      * @return
      */
     @GetMapping("/me")
-    public Object getCurrentUser(@AuthenticationPrincipal UserDetails user){
+    public Object getCurrentUser(Authentication user, HttpServletRequest request) throws UnsupportedEncodingException {
+        String header = request.getHeader("Authorization");
+        String token = StringUtils.substringAfter(header,"bearer ");
+        Claims claims = Jwts.parser().setSigningKey(securityProperties.getoAuth2Properties().getJwtSigningKey().getBytes("UTF-8"))
+        .parseClaimsJws(token).getBody();
+        String company = (String) claims.get("company");
+        logger.info("--->" + company);
         return user;
     }
 
@@ -110,7 +133,7 @@ public class UserController {
     }
 
     /**
-     * 使用正则表达式来确保传入的id1是数字而不是其它字符
+     * 使用正则表达式来确保传入的id是数字而不是其它字符
      * @param id
      * @return
      */
