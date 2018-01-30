@@ -15,17 +15,17 @@
         <relativePath>../imooc-security</relativePath>
     </parent>
     <dependencies>
-        <!--<dependency>
+        <dependency>
             <groupId>com.imooc.security</groupId>
             <artifactId>imooc-security-browser</artifactId>
             <version>${imooc.security.version}</version>
-        </dependency>-->
+        </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.imooc.security</groupId>
             <artifactId>imooc-security-app</artifactId>
             <version>${imooc.security.version}</version>
-        </dependency>
+        </dependency>-->
         <!-- spring测试框架 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

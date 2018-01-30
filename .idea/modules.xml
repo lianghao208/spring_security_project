@@ -8,6 +8,10 @@
       <module fileurl="file://$PROJECT_DIR$/imooc-security-core/imooc-security-core.iml" filepath="$PROJECT_DIR$/imooc-security-core/imooc-security-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/imooc-security-demo/imooc-security-demo.iml" filepath="$PROJECT_DIR$/imooc-security-demo/imooc-security-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring_security_project.iml" filepath="$PROJECT_DIR$/spring_security_project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sso-client1/sso-client1.iml" filepath="$PROJECT_DIR$/sso-client1/sso-client1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sso-client2/sso-client2.iml" filepath="$PROJECT_DIR$/sso-client2/sso-client2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sso-demo/sso-demo.iml" filepath="$PROJECT_DIR$/sso-demo/sso-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sso-server/sso-server.iml" filepath="$PROJECT_DIR$/sso-server/sso-server.iml" />
     </modules>
   </component>
 </project>

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.imooc.dto.User;
 import com.imooc.dto.UserQueryCondition;
 import com.imooc.exception.UserNotExistException;
-import com.imooc.security.app.social.AppSignUpUtils;
+//import com.imooc.security.app.social.AppSignUpUtils;
 import com.imooc.security.core.properties.SecurityProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -45,8 +45,8 @@ public class UserController {
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
 
-    @Autowired
-    private AppSignUpUtils appSignUpUtils;
+    /*@Autowired
+    private AppSignUpUtils appSignUpUtils;*/
 
     @Autowired
     private SecurityProperties securityProperties;
@@ -61,8 +61,9 @@ public class UserController {
     public void regist(User user, HttpServletRequest request){
         //不管注册用户、绑定用户，都会拿到一个用户唯一标识（使用username）
         String userId = user.getUsername();//从用户注册的请求中拿用户名
-        //providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));//绑定用户信息，将用户名id和Session绑定，将用户id和Session等信息插入数据库
-        appSignUpUtils.doPostSignUp(new ServletWebRequest(request),userId);
+        //如果是app访问注册，则使用appSignUpUtils
+        providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));//绑定用户信息，将用户名id和Session绑定，将用户id和Session等信息插入数据库
+        //appSignUpUtils.doPostSignUp(new ServletWebRequest(request),userId);
     }
 
     /**

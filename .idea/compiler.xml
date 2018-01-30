@@ -21,6 +21,10 @@
         <module name="imooc-security-core" />
         <module name="imooc-security-demo" />
         <module name="imoocsecurityapp" />
+        <module name="sso-client1" />
+        <module name="sso-client2" />
+        <module name="sso-demo" />
+        <module name="sso-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -30,6 +34,10 @@
       <module name="imooc-security-core" target="1.8" />
       <module name="imooc-security-demo" target="1.8" />
       <module name="imoocsecurityapp" target="1.5" />
+      <module name="sso-client1" target="1.8" />
+      <module name="sso-client2" target="1.8" />
+      <module name="sso-demo" target="1.8" />
+      <module name="sso-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

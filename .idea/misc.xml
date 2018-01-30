@@ -8,6 +8,10 @@
         <option value="$PROJECT_DIR$/imooc-security-browser/pom.xml" />
         <option value="$PROJECT_DIR$/imoocsecurityapp/pom.xml" />
         <option value="$PROJECT_DIR$/imooc-security-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/sso-server/pom.xml" />
+        <option value="$PROJECT_DIR$/sso-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/sso-client1/pom.xml" />
+        <option value="$PROJECT_DIR$/sso-client2/pom.xml" />
       </list>
     </option>
   </component>
